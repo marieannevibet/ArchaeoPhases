@@ -35,22 +35,28 @@ app_ArchaeoPhases <- function() {
 #' @return A data frame (data.frame) containing a representation of the data in the file.
 #' @export
 #'
-ImportCSV <- function(file, dec='.', sep=',', comment.char = '#', header = TRUE, iterationColumn = NULL, referenceYear = NULL, rowToWithdraw = NULL, bin.width = NULL){
-
+ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
+                      header = TRUE, iterationColumn = NULL,
+                      referenceYear = NULL, rowToWithdraw = NULL,
+                      bin.width = NULL)
+{
   # importing the CSV file
-  data = read.csv(file, dec = dec, sep=sep, comment.char = comment.char, header = header)
+  data = read.csv(file, dec = dec, sep=sep, comment.char = comment.char,
+                  header = header)
 
   # Withdrawing the iterations column
   if (is.null(iterationColumn)){
     return(data)
-  } else {
+  }
+  else {
     data = data[,-iterationColumn]
   }
 
   # Withdrawing a row
   if (is.null(rowToWithdraw)){
     return(data)
-  }   else {
+  }
+  else {
     if (is.numeric(rowToWithdraw)) {
       data = data[-rowToWithdraw, ]
     }
@@ -73,21 +79,23 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#', header = TRUE,
       }
     }
 
-  # Conversion of the MCMC samples in date format cal BP or other to BC/AD
+    # Conversion of the MCMC samples in date format cal BP or other to BC/AD
     if (is.null(referenceYear)){
       return(data)
-    } else {
-    data2 = data
-    L = length(data)
-    conv <- function(value, T0){
-      T0 - value
     }
-    for (i in 1:L){
-      if( is.numeric(data[,i]) == TRUE){
-        data2[,i] = sapply(data[,i], conv, referenceYear)
+    else {
+      data2 = data
+      L = length(data)
+      conv <- function(value, T0){
+        T0 - value
       }
+      for (i in 1:L){
+        if( is.numeric(data[,i]) == TRUE){
+          data2[,i] = sapply(data[,i], conv, referenceYear)
+        }
+      }
+      return(data2)
     }
-    return(data2)
   }
 }
 
