@@ -1036,71 +1036,84 @@ MultiHPD <- function (data, position, level = 0.95)
 #' @param data dataframe containing the output of the MCMC algorithm
 #' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
 #' @param level probability corresponding to the level of confidence
+#' @param intervals one of "CI" for credible intervals, or "HPD" for highest posterior density intervals
 #' @param title title of the graph
-#' @param exportFile the name of the file to be saved. If NULL then no graph is saved.
-#' @param exportFormat the format of the export file : PNG or SVG.
+#' @param subtitle subtitle of the graph
+#' @param caption caption of the graph
+#' @param labelXaxis x axis label of the graph
+#' @param labelYaxis y axis label of the graph
+#' @param height height of the graph in units
+#' @param width width of the graph in units
+#' @param units recognized by ggsave function, one of "in", "cm", "mm"
+#' @param x.min minimum x axis value
+#' @param x.max maximum x axis value
+#' @param x.scale one of "calendar" for calendar years, "bp" for years before present, or "elapsed" for years after a specified origin
+#' @param elapsed.origin.position the position of the column corresponding to the origin for elapsed time calculations
+#' @param dumbbell.size size of the symbols used to plot dates
+#' @param dot.guide switch for guides from y-axis to plot symbols
+#' @param dot.guide.size size of the dot guides
+#' @param y.grid switch for horizontal grids
+#' @param file the name of the file to be saved. If NULL then no graph is saved.
 #' @return a plot of the endpoints of the credible intervals of a series of dates
 #' @export
 
-MultiDatesPlot <- function(data, position, level=0.95, intervals = "CI", title = "Plot of intervals", labelXaxis = "Calendar Year", exportFile = NULL, exportFormat = "PNG"){
-
-  if(intervals =="CI"){
-  Bornes = MultiCredibleInterval(data, position, level=level)
-  }else if(intervals =="HPD") {
-  Bornes = MultiHPD(data, position, level=level)
-  }
-  Ordered = Bornes[order(Bornes[,2]),]
-  nbCol = dim(Ordered)[2]
-
-  NbDates = length(position)
-  DatesNames <- rownames(Ordered)
-
-  minValuex <- floor( min(Ordered[,2], na.rm = TRUE)/100) * 100
-  maxValuex <- ceiling( max(Ordered[,-c(1,2)],na.rm = TRUE)/100) * 100
-  middleValuex <- ( maxValuex + minValuex) / 2
-  P1Valuex <- minValuex + ( maxValuex - minValuex ) / 4
-  P3Valuex <- middleValuex + ( maxValuex - minValuex ) / 4
-  seq = seq(minValuex, maxValuex)
-
-
-  ## Graph
-  par(las=1, mfrow=c(1,1), cex.axis=0.8, mar=c(5,6,4,2))
-  plot(0, main = title, ylab="", xlab = labelXaxis, ylim=c(0, NbDates), xlim=c(minValuex, maxValuex), type="n", axes=F)
-  grid()
-  # abscissa axis
-  axis(1, at=c(minValuex, P1Valuex, middleValuex, P3Valuex, maxValuex) )
-  # ordinate axis
-  axis(2, at=1:NbDates, labels =DatesNames, las =2)
-
-  ## Phase Time Range
-  for (i in 1:NbDates ) { for (j in seq(2,(nbCol-1), by = 2)) { segments(Ordered[i,j], i, Ordered[i,j+1], i, lwd=6) } }
-
-  # Options for export
-  if(!is.null(exportFile)) {
-
-    if(exportFormat == "PNG") {
-      png( filename = paste(exportFile,"png", sep =".") )
+MultiDatesPlot <- function (data, position, level = 0.95, intervals = "CI",
+                            title = "Plot of intervals",
+                            subtitle = NULL,
+                            caption = "ArchaeoPhases",
+                            labelXaxis = "Calendar Year",
+                            labelYaxis = NULL,
+                            height = 7, width = 7, units = "in",
+                            x.min = NULL, x.max = NULL,
+                            x.scale = "calendar",
+                            elapsed.origin.position = NULL,
+                            dumbbell.size = 3, dot.guide = FALSE,
+                            dot.guide.size = 0.25, y.grid = FALSE,
+                            file = NULL)
+{
+  library(ggplot2)
+  library(ggalt)
+  if (x.scale == "elapsed") {
+    if (is.null(elapsed.origin.position)) {
+      stop("Elapsed origin not specified")
     }
-    if(exportFormat == "SVG") {
-      svg( filename = paste(exportFile,"svg", sep =".") )
+    else {
+      data <- data - data[,elapsed.origin.position]
     }
-
-    par(las=1, mfrow=c(1,1), cex.axis=0.8, mar=c(5,6,4,2))
-    plot(0, main = title, ylab="", xlab = labelXaxis, ylim=c(0, NbDates), xlim=c(minValuex, maxValuex), type="n", axes=F)
-    grid()
-    # abscissa axis
-    axis(1, at=c(minValuex, P1Valuex, middleValuex, P3Valuex, maxValuex) )
-    # ordinate axis
-    axis(2, at=1:NbDates, labels =DatesNames, las =2)
-
-    ## Phase Time Range
-    for (i in 1:NbDates ) { for (j in seq(2,(nbCol-1), by = 2)) { segments(Ordered[i,j], i, Ordered[i,j+1], i, lwd=6) } }
-
-    dev.off()
   }
-
+  if (intervals == "CI") {
+    Bornes = MultiCredibleInterval(data, position, level = level)
+  }
+  else if (intervals == "HPD") {
+    Bornes = tsd.multi.hpd(data, position, level = level)
+  }
+  Ordered = Bornes[order(Bornes[, 2]), ]
+  Ordered.df <- as.data.frame(Ordered, row.names = make.names(rownames(Ordered), unique = TRUE))
+  if (x.scale == "bp") {
+    Ordered.df[,2] <- 1950-Ordered.df[,2]
+    Ordered.df[,3] <- 1950-Ordered.df[,3]
+  }
+  Ordered.df$y.labs <- rownames(Ordered)
+  h <- ggplot(data = Ordered.df, aes(y = y.labs, x=Ordered.df[,2],
+                                     xend=Ordered.df[,3]))
+  h <- h + labs(x = labelXaxis, y = labelYaxis, title = title,
+                subtitle = subtitle, caption = caption)
+  h <- h + geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide,
+                         dot_guide_size = dot.guide.size)
+  if (!y.grid) {
+    h <- h + theme(panel.grid.major.y=element_blank())
+  }
+  if (!is.null(x.min) & !is.null(x.max)) {
+    h <- h + xlim(x.min, x.max)
+  }
+  if (!is.null(file)) {
+    ggsave(filename = file, plot = h, height = height,
+           width = width, units = units)
+  }
+  dev.new(height = height, width = width)
+  print(h)
+  return(list(Ordered.df))
 }
-
 
 
 #####################################################
