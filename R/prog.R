@@ -1835,17 +1835,18 @@ if (intervals == "CI") {
 else if (intervals == "HPD") {
   Bornes = MultiHPD(groupOfEvents, 1:ncol(groupOfEvents), level = level)
 }
-  Bornes.df <- as.data.frame(Bornes)
-  if (x.scale == "bp") {
-    Bornes.df$CredibleIntervalInf <- 1950-Bornes.df$CredibleIntervalInf
-    Bornes.df$CredibleIntervalSup <- 1950-Bornes.df$CredibleIntervalSup
-  }
-  Bornes.df$y.labs <- factor(as.integer(row.names(Bornes.df)),
-                           labels = paste(sapply(as.numeric(row.names(Bornes.df)),
-                                                 toOrdinal, language),
-                                          occurrence, sep= " "))
-  h <- ggplot(data = Bornes.df, aes(y=y.labs, x=Bornes.df[,2],
-                                    xend=Bornes.df[,3])) +
+  Ordered = Bornes[order(Bornes[, 2]), ]
+  Ordered.df <- as.data.frame(Ordered, row.names = make.names(rownames(Ordered), unique = TRUE))
+    if (x.scale == "bp") {
+      Ordered.df[,2] <- 1950-Ordered.df[,2]
+      Ordered.df[,3] <- 1950-Ordered.df[,3]
+    }
+    Ordered.df$y.labs <- paste(sapply(as.integer(rownames(Ordered)), toOrdinal,
+                               language = language), occurrence, sep= " ")
+  h <- ggplot(data = Ordered.df,
+              aes(y=factor(y.labs, levels=unique(y.labs), ordered=TRUE),
+                  x=Ordered.df[,2],
+                  xend=Ordered.df[,3])) +
     geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide,
                   dot_guide_size = dot.guide.size) +
     labs(x = labelXaxis, y = labelYaxis, title = title,
@@ -1862,5 +1863,5 @@ else if (intervals == "HPD") {
   }
   dev.new(height = height, width = width)
   print(h)
-  list(Bornes.df)
+  list(Ordered.df)
 }
