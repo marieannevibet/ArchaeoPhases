@@ -1835,7 +1835,7 @@ if (intervals == "CI") {
 else if (intervals == "HPD") {
   Bornes = MultiHPD(groupOfEvents, 1:ncol(groupOfEvents), level = level)
 }
-  Ordered = Bornes[order(Bornes[, 2]), ]
+  Ordered = Bornes
   Ordered.df <- as.data.frame(Ordered, row.names = make.names(rownames(Ordered), unique = TRUE))
     if (x.scale == "bp") {
       Ordered.df[,2] <- 1950-Ordered.df[,2]
