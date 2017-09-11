@@ -28,6 +28,7 @@
 #' @param dot.guide.size size of the dot guides
 #' @param y.grid switch for horizontal grids
 #' @param file the name of the file to be saved. If NULL then no graph is saved.
+#' @param appliShiny whether the plot is drawn with the shiny app or not
 #' @param print.data.result If TRUE, the list containing the data to plot will be given
 #' @return a plot of the endpoints of the credible intervals of a series of dates
 #' @export
@@ -44,7 +45,7 @@ MultiDatesPlot <- function (data, position, level = 0.95, intervals = "CI", orde
                             elapsed.origin.position = NULL,
                             dumbbell.size = 3, dot.guide = FALSE,
                             dot.guide.size = 0.25, y.grid = FALSE,
-                            file = NULL, print.data.result = TRUE)
+                            file = NULL, appliShiny=FALSE, print.data.result = TRUE)
 {
   library(ggplot2)
   library(ggalt)
@@ -108,7 +109,9 @@ MultiDatesPlot <- function (data, position, level = 0.95, intervals = "CI", orde
     ggsave(filename = file, plot = h, height = height,
            width = width, units = units)
   }
+  if(appliShiny == FALSE) {
   dev.new(height = height, width = width)
+  }
   print(h)
   
   ## If the result is desired

@@ -266,7 +266,7 @@ shinyServer(function(input, output, session) {
   })
   
   #######################################
-  ####        Onglet : Events        ####
+  ####        Onglet : Dates        ####
   ####    Selection d une chaine      ##
   
   names <- reactive({
@@ -321,9 +321,8 @@ shinyServer(function(input, output, session) {
     }
   )
   
-  #######################################
-  ####        Onglet : Events         ###
-  ##    Selection plusieurs chaines    ##
+
+  #####  Onglet : Dates -   Selection plusieurs chaines    ####
   
   # Initialize reactive values
   values <- reactiveValues()
@@ -413,7 +412,7 @@ shinyServer(function(input, output, session) {
       if(is.null( input$multiChainsCI )) { return()}
       position = seq(1, length(input$multiChainsCI))
       #if(input$exportFile22IT == "TRUE") { outFile = "IntervalsPlot"} else{ outFile = NULL}
-      MultiDatesPlot(selectData(), position, intervals =input$intervals, level = input$level, title = input$titleIntervalsplot)#, exportFile=outFile, exportFormat = input$exportFormatIT)
+      MultiDatesPlot(selectData(), position, intervals =input$intervals, order = input$order, level = input$level, title = input$titleIntervalsplot, appliShiny=TRUE, print.data.result = FALSE)
     })#, height = 600, width = 800)
     
     output$downloadIntervalPlot <- downloadHandler(
@@ -421,7 +420,7 @@ shinyServer(function(input, output, session) {
       content = function(file) {
         position = seq(1, length(input$multiChainsCI))
         png(file)
-        MultiDatesPlot(selectData(), position, intervals =input$intervals, level = input$level, title = input$titleIntervalsplot)#, exportFile=outFile, exportFormat = input$exportFormatIT)
+        MultiDatesPlot(selectData(), position, intervals =input$intervals, level = input$level, title = input$titleIntervalsplot, print.data.result = FALSE)
         dev.off()
       }
     )
@@ -430,7 +429,7 @@ shinyServer(function(input, output, session) {
         if(is.null( input$multiChainsCI )) { return()}
         position = seq(1, length(input$multiChainsCI))
         #if(input$exportFile22 == "TRUE") { outFile = "TempoPlot.png"} else{ outFile = NULL}
-        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors)#, out.file=outFile)
+        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors, appliShiny=TRUE)
     })#, height = 600, width = 800)
     
     output$TempoPlotUI <- renderUI({
@@ -452,7 +451,7 @@ shinyServer(function(input, output, session) {
     output$TempoActivityPlot <- renderPlot({
       if(is.null( input$multiChainsCI )) { return()}
       position = seq(1, length(input$multiChainsCI))
-      TempoActivityPlot(selectData(), position, level = input$level, count=input$count)
+      TempoActivityPlot(selectData(), position, level = input$level, count=input$count, appliShiny=TRUE)
     })#, height = 600, width = 800)
 
     output$TempoActivityPlotUI <- renderUI({

@@ -17,7 +17,7 @@ TempoActivityPlot(data, position, plot.result = NULL, level = 0.95,
                        width = 7, height = 7, units = "in",
                        x.min = NULL, x.max = NULL, colors = TRUE,
                        file = NULL, x.scale = "calendar",
-                       elapsed.origin.position = NULL, print.data.result = TRUE)
+                       elapsed.origin.position = NULL, appliShiny=FALSE, print.data.result = TRUE)
 }
 \arguments{
   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
@@ -43,6 +43,7 @@ TempoActivityPlot(data, position, plot.result = NULL, level = 0.95,
   \item{file}{the name of the graph (+ extension) that will be saved if chosen. Null by default.}
   \item{x.scale}{one of "calendar", "bp", or "elapsed"}
   \item{elapsed.origin.position}{if x.scale is "elapsed", the position of the column corresponding to the occurrence from which elapsed time is calculated}
+  \item{appliShiny}{whether the plot is drawn with the shiny app or not}
   \item{print.data.result}{If TRUE, the list containing the data to plot will be given. Default = TRUE.}
 }
 \value{

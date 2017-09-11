@@ -29,6 +29,7 @@
 #' @param y.grid switch for horizontal grid lines
 #' @param count, if TRUE the counting process is a number, otherwise it is a probability
 #' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
+#' @param appliShiny whether the plot is drawn with the shiny app or not
 #' @param print.data.result If TRUE, the list containing the data to plot will be given
 #' @return a plot
 #' @export
@@ -45,7 +46,7 @@ OccurrencePlot <- function(data, position, level = 0.95, intervals = "CI",
                            elapsed.origin.position = NULL,
                            dumbbell.size = 3, dot.guide = FALSE,
                            dot.guide.size = 0.25, y.grid = FALSE,
-                           count = TRUE, file = NULL, print.data.result = TRUE)
+                           count = TRUE, file = NULL, appliShiny=FALSE, print.data.result = TRUE)
 {
   
   library(ggalt)
@@ -129,7 +130,9 @@ OccurrencePlot <- function(data, position, level = 0.95, intervals = "CI",
     ggsave(filename = file, plot = h, height = height,
            width = width, units = units)
   }
-  dev.new(height = height, width = width)
+  if(appliShiny == FALSE) {
+    dev.new(height = height, width = width)
+  }
   print(h)
   
   ## If the result is desired

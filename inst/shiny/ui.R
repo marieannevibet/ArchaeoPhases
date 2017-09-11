@@ -157,6 +157,7 @@ renderInputs22 <- function() {
       h5(helpText("Intervals plot options")),
       textInput(inputId='titleIntervalsplot', label="Intervals plot title", "Intervals plot" ),
       radioButtons(inputId='intervals', label="Intervals", choices=c("Credible Intervals"='CI', "Highest Posterior Density"='HPD'), selected='CI'),
+      radioButtons(inputId='order', label="Order of y", choices=c("Default"='default', "Increasing order"='increasing'), selected='default'),
       downloadButton('downloadIntervalPlot', 'Download Intervals plot'),
       br(),
       h5(helpText("Tempo plot options")),
