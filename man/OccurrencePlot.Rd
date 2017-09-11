@@ -1,8 +1,8 @@
-\name{TempoPlot}
-\alias{TempoPlot}
+\name{OccurrencePlot}
+\alias{OccurrencePlot}
 \title{Plot of the occurence of events}
 \usage{
-TempoPlot(data, position, plot.result = NULL, level = 0.95,
+OccurrencePlot(data, position, plot.result = NULL, level = 0.95,
                        count = TRUE, Gauss = FALSE, title = "Tempo plot",
                        subtitle = NULL, caption = "ArcheoPhases",
                        legend.title = "Legend",
@@ -46,28 +46,23 @@ TempoPlot(data, position, plot.result = NULL, level = 0.95,
   \item{print.data.result}{If TRUE, the list containing the data to plot will be given. Default = TRUE.}
 }
 \value{
-It calculates the cumulative frequency of specified events by calculating how many events took place before each date in a specified range of dates. The result is given in calendar year (in format BC/AD). It may also return a list containing the data to plot (if print.data.result = TRUE).
+The result is given in calendar year (in format BC/AD). It may also return a list containing the data to plot (if print.data.result = TRUE).
 }
 \description{
-A statistical graphic designed for the archaeological study of rhythms of the long term that embodies a theory of archaeological evidence for the occurrence of events.
+
 }
 \details{
-The tempo plot is one way to measure change over time: it estimates the cumulative occurrence of archaeological events in a Bayesian calibration.
-The tempo plot yields a graphic where the slope of the plot directly reflects the pace of change: a period of rapid change yields a steep slope and a period of slow change yields a gentle slope. When there is no change, the plot is horizontal. When change is instantaneous, the plot is vertical.
+
 }
 \author{
   Anne Philippe <Anne.Philippe@univ-nantes.fr>, Thomas S. Dye  <TSD@tsdye.com> and
 
   Marie-Anne Vibet <Marie-Anne.Vibet@univ-nantes.fr>
 }
-\references{
-Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratification. Journal of Archaeological Science, 71, 1--9.
 
-}
 \examples{
   data(Events); 
-  TempoPlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
-  TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = TRUE)
+  OccurrencePlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
 }
 \keyword{ tempo plot}
 \keyword{ credible interval }

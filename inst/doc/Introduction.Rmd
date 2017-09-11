@@ -16,6 +16,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+1. Introduction to ArchaeoPhases
+===============
 
 ```{r, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(comment = "")
@@ -98,7 +100,9 @@ Oxcal_MCMC_Groups = CreateMinMaxGroup(KADatesOxcal, position = 26, name = "EPI",
 BCal generates a CSV file containing the MCMC samples of all parameters (dates, start and end of phases). However, **all dates are in format cal BP, that is in year before 1950**. 
 Hence, the MCMC have to be converted from the date format cal BP into the calendar year. This can be done by the following lines :
 ```{r,eval=FALSE}
-BCal_MCMC = ImportCSV("pathToFiles/fileName.csv", iterationColumn = 1, referenceYear = 1950, rowToWithdraw = lastline)
+BCal_MCMC = ImportCSV("pathToFiles/fileName.csv", iterationColumn = 1, referenceYear = 1950, rowToWithdraw = "last", bin.width=1)
+# equivalent to 
+BCal_MCMC = ImportCSV.BCal("pathToFiles/fileName.csv", bin.width=1)
 ```
 Note that the last line of the file may contain "NA". It that case, this line should be withdrawn from the dataset in order to proceed further. 
 Now, again, a file containing the minimum and the maximum values of each group of dates should be created. Let's use the Fishpond dataframe. 
@@ -146,7 +150,9 @@ The Geweke criterion criterion confirms that all of the Markov chains reached eq
 As a conclusion, ChronoModel generated correct samples of the posterior distribution. 
 Now gathering the three chains, a total of 30 000 iterations was collected in order to give estimations of the posterior distribution of each parameter.
 
-## Tempo Plot for a series of dates
+## Analysis of a series of dates
+
+### Tempo Plot
 The tempo plot has been introduced by Thomas S. Dye (Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratification. Journal of Archaeological Science, 71, 1--9). See Philippe and Vibet 2017 for more statistical details.
 
 The tempo plot is one way to measure change over time: it estimates the cumulative occurrence of archaeological events in a Bayesian calibration.
@@ -158,6 +164,20 @@ data("KADatesChronoModel")
 TempoPlot(KADatesChronoModel, c(2:17), level = 0.95)
 ```
 From these graphs, we can see that the highest part of the sampled activity is dated between -45 000 to -35 000 but two dates are younger, at about -32 000 and -28 000.
+
+### Tempo Activity Plot
+
+```{r,fig.align='center',fig.width=6,fig.height=5}
+data("KADatesChronoModel")
+TempoActivityPlot(KADatesChronoModel, c(2:17), level = 0.95)
+```
+
+### Occurrence Plot
+
+```{r,fig.align='center',fig.width=6,fig.height=5}
+data("KADatesChronoModel")
+OccurrencePlot(KADatesChronoModel, c(2:17), level = 0.95)
+```
 
 
 

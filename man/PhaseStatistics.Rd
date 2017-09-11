@@ -16,9 +16,7 @@ PhaseStatistics(PhaseMin_chain, PhaseMax_chain, level = 0.95)
   \item{1}{Statistics of the minimum of the dates included in the phase}
   \item{2}{Statistics of the maximum of the dates included in the phase}
   \item{3}{Statistics of the duration of the dates included in the phase}
-  \item{4}{The endpoints of the phase time range}
   The results are given in calendar year (in format BC/AD).
-
 }
 \description{
 Estimation of several summary statistics of the minimum, the maximum and the duration of the dates included in the phase. 

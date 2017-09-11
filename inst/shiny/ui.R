@@ -9,20 +9,20 @@ library(ggplot2)
 
 renderInputs0 <- function() {
     fluidRow(
-      h4("Post-Processing of the Markov Chain Simulated by ChronoModel, by BCal or by Oxcal"),
+      h4("Post-Processing of the Markov Chain Simulated by BCal, by ChronoModel or by Oxcal"),
       br(),
-      h4("This is a Shiny application for ChronoModel, BCal or Oxcal users who want to use ArchaeoPhases package without having to know R software."),
+      h4("This is a Shiny application for BCal, ChronoModel or Oxcal users who want to use ArchaeoPhases package without having to know R software."),
       h4("The process is very simple !"),
-      h4("First model your chronology with ChronoModel, BCal or Oxcal or any other software for constructing archaeological chronologies.  "),
+      h4("First model your chronology with BCal, ChronoModel or Oxcal or any other software for constructing archaeological chronologies.  "),
       h4("Then extract the simulated Markov Chains and save it into a CSV file. "),
       h4("And finally, import the CSV file using this web application and analyse your chronological dates or groups of dates. "),
       br(),
       tags$div(class="header", checked=NA,
-                  tags$p("To visite ChronoModel website"), tags$a(href="http://www.chronomodel.fr/", "Click Here!"), 
-               br(),
-                  tags$p("To visite Oxcal website"), tags$a(href="https://c14.arch.ox.ac.uk/oxcalhelp/hlp_contents.html", "Click Here!"),
-               br(),
-               tags$p("To visite BCal website"), tags$a(href="http://bcal.shef.ac.uk/.html", "Click Here!")
+              tags$p("To visite BCal website"), tags$a(href="http://bcal.shef.ac.uk/.html", "Click Here!"),
+              br(),
+              tags$p("To visite ChronoModel website"), tags$a(href="http://www.chronomodel.fr/", "Click Here!"), 
+              br(),
+              tags$p("To visite Oxcal website"), tags$a(href="https://c14.arch.ox.ac.uk/oxcalhelp/hlp_contents.html", "Click Here!")
        ),
       br(),
       # adding the new div tag to the sidebar            
@@ -33,9 +33,10 @@ renderInputs0 <- function() {
       br(),
       # adding the new div tag to the sidebar            
       tags$div(class="header", checked=NA,
-               tags$p("This application was developed by Anne Philippe and Marie-Anne Vibet members of the Laboratoire de mathématiques Jean Leray, Université de Nantes, France."),
+               tags$p("This application is developed by Anne Philippe and Marie-Anne Vibet members of the Laboratoire de mathématiques Jean Leray, Université de Nantes, France,"),
+               tags$p("and by Thomas S. Dye from T. S. Dye & Colleagues, Archaeologists, Inc., Honolulu. "),
                tags$p("Maintainer : Anne Philippe <anne.philippe@univ-nantes.fr>"),
-               tags$p("Last release : April 2017")
+               tags$p("Last release : Septembre 2017")
       )
       
   )}

@@ -2,15 +2,48 @@
 \alias{TempoActivityPlot}
 \title{Plot of the activity of events}
 \usage{
-TempoActivityPlot(data, position, level=0.95,  count = TRUE, 
-title = "Activity plot")
+TempoActivityPlot(data, position, plot.result = NULL, level = 0.95,
+                       count = TRUE, Gauss = FALSE, title = "Tempo plot",
+                       subtitle = NULL, caption = "ArcheoPhases",
+                       legend.title = "Legend",
+                       legend.labels = c("Bayes estimate",
+                                         "Credible interval, low",
+                                         "Credible interval, high",
+                                         "Gaussian approx., high",
+                                         "Gaussian approx., low"),
+                       x.label = "Calendar year",
+                       y.label = "Cumulative events",
+                       line.types = c("solid", "12", "11", "28", "28"),
+                       width = 7, height = 7, units = "in",
+                       x.min = NULL, x.max = NULL, colors = TRUE,
+                       file = NULL, x.scale = "calendar",
+                       elapsed.origin.position = NULL, print.data.result = TRUE)
 }
 \arguments{
-   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
+  \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
   \item{position}{numeric vector containing the position of the column corresponding to the MCMC chains of interest}
+  \item{plot.result}{a list containing the data to plot, typically the result of a previous run of TempoPlot()}
   \item{level}{probability corresponding to the level of confidence used for the credible interval}
   \item{count}{if TRUE the counting process is given as a number, otherwise it is a probability}
+  \item{Gauss}{if TRUE, the Gaussian approximation of the CI is used}
   \item{title}{title of the graph}
+  \item{subtitle}{subtitle of the graph}
+  \item{caption}{caption of the graph}
+  \item{legend}{the title of the legend}
+  \item{legend.labels}{a vector of strings to label legend entries}  
+  \item{x.label}{label of the x-axis}
+  \item{y.label}{label of the y-axis}
+  \item{line.types}{type of the lines drawn of the graph in the order of legend.labels}
+  \item{width}{width of the plot in units}
+  \item{height}{height of the plot in units}
+  \item{units}{units used to specify width and height.  One of "in", "cm", or "mm".  Default = "in".}
+  \item{x.min}{minimum value for x axis}
+  \item{y.max}{maximum value for x axis}
+  \item{colors}{if TRUE, the graph is drawn with colors, otherwise it is drawn in black and white}
+  \item{file}{the name of the graph (+ extension) that will be saved if chosen. Null by default.}
+  \item{x.scale}{one of "calendar", "bp", or "elapsed"}
+  \item{elapsed.origin.position}{if x.scale is "elapsed", the position of the column corresponding to the occurrence from which elapsed time is calculated}
+  \item{print.data.result}{If TRUE, the list containing the data to plot will be given. Default = TRUE.}
 }
 \value{
 

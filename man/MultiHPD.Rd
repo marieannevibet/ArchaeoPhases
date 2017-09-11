@@ -12,14 +12,15 @@ MultiHPD(data, position, level=0.95)
   \item{level}{probability corresponding to the level of confidence}
 }
 \value{
-Returns a matrix of values containing the level of confidence and the endpoints of each interval for each variable of the MCMC chain. The name of the resulting rows are the positions of the corresponding columns in the CSV file. The result is given in calendar year (in format BC/AD).
+Returns a matrix of values containing the level of confidence and the endpoints of each interval for each variable of the MCMC chain. 
+The name of the resulting rows are the positions of the corresponding columns in the CSV file. The result is given in calendar year (in format BC/AD).
 }
 \description{
-Estimation of the highest posterior density regions for each variables of simulated Markov chain. This function uses the "hdr" function oincluded in the package "hdrcde.
+Estimation of the highest posterior density regions for each variables of simulated Markov chain. This function uses the "hdr" function oincluded in the package "hdrcde. A HPD region may be a union of several intervals. 
 
 }
 \author{
-  Anne Philippe <Anne.Philippe@univ-nantes.fr> and
+  Anne Philippe <Anne.Philippe@univ-nantes.fr>  and
 
   Marie-Anne Vibet <Marie-Anne.Vibet@univ-nantes.fr>
 }
