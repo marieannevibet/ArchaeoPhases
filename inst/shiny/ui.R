@@ -157,7 +157,7 @@ renderInputs22 <- function() {
       h5(helpText("Intervals plot options")),
       textInput(inputId='titleIntervalsplot', label="Intervals plot title", "Intervals plot" ),
       radioButtons(inputId='intervals', label="Intervals", choices=c("Credible Intervals"='CI', "Highest Posterior Density"='HPD'), selected='CI'),
-      radioButtons(inputId='order', label="Order of y", choices=c("Default"='default', "Increasing order"='increasing'), selected='default'),
+      radioButtons(inputId='order', label="Order of y", choices=c("Default order"='default', "Increasing order"='increasing'), selected='default'),
       downloadButton('downloadIntervalPlot', 'Download Intervals plot'),
       br(),
       h5(helpText("Tempo plot options")),
@@ -165,13 +165,21 @@ renderInputs22 <- function() {
       column(6,radioButtons(inputId='GaussCI', label="Gaussian approx", choices=c(Yes='TRUE', No='FALSE'), selected='FALSE')), 
       column(6,radioButtons(inputId='count', label="Counting process", choices=c(Number='TRUE', Probability='FALSE'), selected='TRUE')),
       textInput(inputId='xlabel', label="x-label", "Calendar year" ),
-      textInput(inputId='ylabel', label="y-label", "Cumulative events" ),
+      uiOutput("ui"),
       column(6,radioButtons(inputId='colors', label="Use of colors", choices=c(Yes='TRUE', No='FALSE'), selected='TRUE')),
       downloadButton('downloadTempoPlot', 'Download Tempo plot'),
-      downloadButton('downloadActivityPlot', 'Download Activity plot')
+      downloadButton('downloadActivityPlot', 'Download Activity plot'),
+      br(),
+      h5(helpText("Occurrence plot options")),
+      textInput(inputId='titleOccurrenceplot', label="Occurrence plot title", "Occurrence plot" ),
+      textInput(inputId='xlabelO', label="x-label", "Calendar year" ),
+      textInput(inputId='ylabelO', label="y-label", "Cumulative events" ),
+      downloadButton('downloadOccurrencePlot', 'Download Occurrence plot')
     )
     
   )}
+
+
 
 
    ##################################

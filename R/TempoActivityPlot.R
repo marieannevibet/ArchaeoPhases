@@ -115,7 +115,7 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
   result.mat <- cbind(t=x, y=y)
   plot.result <- as.data.frame(result.mat)
   
-  h <- ggplot(data = plot.result, aes(x = t, y = y ))
+  h <- ggplot(data = plot.result, aes(x = t, y = y))
   h <- h + scale_linetype_manual(values = line.types,
                                  guide = guide_legend(title = legend.title))
   h <- h + geom_line()

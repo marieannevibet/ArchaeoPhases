@@ -1,5 +1,5 @@
 
-shinyServer(function(input, output, session) {
+shinyServer(function(input, output, clientData, session) {
   
   # By default, Shiny limits file uploads to 5MB per file. You can modify this limit by using the shiny.maxRequestSize option. 
   # For example, adding options(shiny.maxRequestSize=30*1024^2) to the top of server.R would increase the limit to 30MB.
@@ -425,11 +425,20 @@ shinyServer(function(input, output, session) {
       }
     )
     
+    output$ui<- renderUI({
+      switch(input$count,
+             "TRUE" = textInput(inputId='ylabel', label="y-label", "Cumulative events" ),
+             "FALSE" = textInput(inputId='ylabel', label="y-label", "Probability" )
+      )
+    })
+
+    
+    
     output$TempoPlot <- renderPlot({
         if(is.null( input$multiChainsCI )) { return()}
         position = seq(1, length(input$multiChainsCI))
         #if(input$exportFile22 == "TRUE") { outFile = "TempoPlot.png"} else{ outFile = NULL}
-        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors, appliShiny=TRUE)
+        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors, appliShiny=TRUE, print.data.result = FALSE)
     })#, height = 600, width = 800)
     
     output$TempoPlotUI <- renderUI({
@@ -443,7 +452,7 @@ shinyServer(function(input, output, session) {
       content = function(file) {
         position = seq(1, length(input$multiChainsCI))
         png(file)
-        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors)#, out.file=outFile)
+        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors, print.data.result = FALSE)#, out.file=outFile)
         dev.off()
       }
     )
@@ -451,7 +460,7 @@ shinyServer(function(input, output, session) {
     output$TempoActivityPlot <- renderPlot({
       if(is.null( input$multiChainsCI )) { return()}
       position = seq(1, length(input$multiChainsCI))
-      TempoActivityPlot(selectData(), position, level = input$level, count=input$count, appliShiny=TRUE)
+      TempoActivityPlot(selectData(), position, level = input$level, count=input$count, appliShiny=TRUE, print.data.result = FALSE)
     })#, height = 600, width = 800)
 
     output$TempoActivityPlotUI <- renderUI({
@@ -465,10 +474,33 @@ shinyServer(function(input, output, session) {
       content = function(file) {
         position = seq(1, length(input$multiChainsCI))
         png(file)
-        TempoActivityPlot(selectData(), position, level = input$level, count=input$count)
+        TempoActivityPlot(selectData(), position, level = input$level, count=input$count, print.data.result = FALSE)
         dev.off()
       }
     )
+    
+    output$OccurrencePlot <- renderPlot({
+      if(is.null( input$multiChainsCI )) { return()}
+      position = seq(1, length(input$multiChainsCI))
+      OccurrencePlot(selectData(), position, level = input$level, count=input$count, appliShiny=TRUE, print.data.result = FALSE)
+    })
+    
+    output$OccurrencePlotUI <- renderUI({
+      if(is.null( input$multiChainsCI )) {h5(" Nothing to display ")}
+      else{
+        plotOutput("OccurrencePlot", width="80%")
+      }
+    })
+    output$downloadOccurrencePlot <- downloadHandler(
+      filename = function() { paste("downloadOccurrencePlot", '.png', sep='') },
+      content = function(file) {
+        position = seq(1, length(input$multiChainsCI))
+        png(file)
+        OccurrencePlot(selectData(), position, level = input$level, count=input$count, print.data.result = FALSE)
+        dev.off()
+      }
+    )
+    
   output$result22 <- renderUI({
     if(is.null(dataInput()))
       h5("No data imported")
@@ -477,7 +509,9 @@ shinyServer(function(input, output, session) {
                 tabPanel("Credible intervals", uiOutput("resultTableMCI")), 
                 tabPanel("HPD regions", uiOutput("resultTableMHPD")), 
                 tabPanel("Intervals Plot", plotOutput("MultiDatesPlot")), 
-                tabPanel("Tempo Plot", plotOutput("TempoPlot"), br(), plotOutput("TempoActivityPlot"))) 
+                tabPanel("Tempo Plot", plotOutput("TempoPlot"), br(), plotOutput("TempoActivityPlot")), 
+                tabPanel("Occurrence Plot", plotOutput("OccurrencePlot"))
+                ) 
     
   })
   
