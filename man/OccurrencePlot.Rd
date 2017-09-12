@@ -47,13 +47,16 @@ OccurrencePlot(data, position, plot.result = NULL, level = 0.95,
   \item{print.data.result}{If TRUE, the list containing the data to plot will be given. Default = TRUE.}
 }
 \value{
+It calculates the calendar date t corresponding to the smallest date such that the number of events observed before t is equal to k.
 The result is given in calendar year (in format BC/AD). It may also return a list containing the data to plot (if print.data.result = TRUE).
 }
 \description{
-
+A statistical graphic designed for the archaeological study of the timing of the occurrence of events. 
 }
 \details{
-
+If we have k events. 
+We can estimate the calendar date t corresponding to the smallest date such that the number of events observed before t is equal to k.  
+The OccurrencePlot estimates theses dates and give the credible interval or the highest posterior density (HPD) region of theses dates associated to a desired level of confidence.
 }
 \author{
   Anne Philippe <Anne.Philippe@univ-nantes.fr>, Thomas S. Dye  <TSD@tsdye.com> and

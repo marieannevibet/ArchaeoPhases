@@ -47,9 +47,8 @@ TempoActivityPlot(data, position, plot.result = NULL, level = 0.95,
   \item{print.data.result}{If TRUE, the list containing the data to plot will be given. Default = TRUE.}
 }
 \value{
-
-It calculates the cumulative frequency of specified events by calculating how many events took place before each date in a specified range of dates. The result is given in calendar year (in format BC/AD).
-
+It is the derivative of the TempoPlot bayesian estimate. 
+It may also return a list containing the data to plot (if print.data.result = TRUE). The result is given in calendar year (in format BC/AD).
 }
 \description{
 A statistical graphic designed for the archaeological study of rhythms of the long term that embodies a theory of archaeological evidence for the occurrence of events.
@@ -61,13 +60,12 @@ A statistical graphic designed for the archaeological study of rhythms of the lo
 }
 \references{
 Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratification. Journal of Archaeological Science, 71, 1--9.
-
 }
 \examples{
   data(Events); 
   TempoActivityPlot(Events[1:1000,], c(2:5))
   TempoActivityPlot(Events[1:1000,], c(2:5), count = TRUE)
 }
-\keyword{ tempo activity plot}
+\keyword{ Tempo Activity plot}
 \keyword{ mean }
 
