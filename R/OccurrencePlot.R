@@ -27,14 +27,13 @@
 #' @param dot.guide switch for a horizontal guide from the y axis
 #' @param dot.guide.size size of the dot guide
 #' @param y.grid switch for horizontal grid lines
-#' @param count, if TRUE the counting process is a number, otherwise it is a probability
 #' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
 #' @param appliShiny whether the plot is drawn with the shiny app or not
 #' @param print.data.result If TRUE, the list containing the data to plot will be given
 #' @return a plot
 #' @export
 
-OccurrencePlot <- function(data, position, level = 0.95, intervals = "CI",
+OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, intervals = "CI",
                            title = "Occurrence plot",
                            subtitle = NULL,
                            caption = "ArchaeoPhases",
@@ -46,11 +45,9 @@ OccurrencePlot <- function(data, position, level = 0.95, intervals = "CI",
                            elapsed.origin.position = NULL,
                            dumbbell.size = 3, dot.guide = FALSE,
                            dot.guide.size = 0.25, y.grid = FALSE,
-                           count = TRUE, file = NULL, appliShiny=FALSE, print.data.result = TRUE)
+                           file = NULL, appliShiny=FALSE, print.data.result = TRUE)
 {
-  
-  library(ggalt)
-  library(toOrdinal)
+
   sort.rows <- function(x) {
     if (is.numeric(as.matrix(x))) {
       res <- as.data.frame(t(apply(x,1,sort)))
@@ -113,7 +110,7 @@ OccurrencePlot <- function(data, position, level = 0.95, intervals = "CI",
   
 
   h <- ggplot(data = Ordered.df,
-              aes(y=factor(y.labs, levels=unique(y.labs), ordered=TRUE),
+              aes(y=factor(Ordered.df$y.labs, levels=unique(Ordered.df$y.labs), ordered=TRUE),
                   x=Ordered.df[,2],
                   xend=Ordered.df[,3])) +
     geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide,

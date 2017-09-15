@@ -13,6 +13,6 @@
 #' @export
 #'
 
-ImportCSV.BCal <- function(file, bin.width) {
+ImportCSV.BCal <- function(file, bin.width=NULL) {
   ImportCSV(file = file, iterationColumn = 1, referenceYear = 1950, rowToWithdraw = "last", bin.width = bin.width)
 }

@@ -17,7 +17,8 @@ TempoPlot(data, position, plot.result = NULL, level = 0.95,
                        width = 7, height = 7, units = "in",
                        x.min = NULL, x.max = NULL, colors = TRUE,
                        file = NULL, x.scale = "calendar",
-                       elapsed.origin.position = NULL, appliShiny=FALSE, print.data.result = TRUE)
+                       elapsed.origin.position = NULL, 
+                       appliShiny=FALSE, print.data.result = TRUE)
 }
 \arguments{
   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
@@ -29,7 +30,7 @@ TempoPlot(data, position, plot.result = NULL, level = 0.95,
   \item{title}{title of the graph}
   \item{subtitle}{subtitle of the graph}
   \item{caption}{caption of the graph}
-  \item{legend}{the title of the legend}
+  \item{legend.title}{the title of the legend}
   \item{legend.labels}{a vector of strings to label legend entries}  
   \item{x.label}{label of the x-axis}
   \item{y.label}{label of the y-axis}
@@ -38,7 +39,7 @@ TempoPlot(data, position, plot.result = NULL, level = 0.95,
   \item{height}{height of the plot in units}
   \item{units}{units used to specify width and height.  One of "in", "cm", or "mm".  Default = "in".}
   \item{x.min}{minimum value for x axis}
-  \item{y.max}{maximum value for x axis}
+  \item{x.max}{maximum value for x axis}
   \item{colors}{if TRUE, the graph is drawn with colors, otherwise it is drawn in black and white}
   \item{file}{the name of the graph (+ extension) that will be saved if chosen. Null by default.}
   \item{x.scale}{one of "calendar", "bp", or "elapsed"}

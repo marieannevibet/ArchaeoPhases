@@ -6,6 +6,8 @@ library(DT)
 library(hdrcde)
 library(coda)
 library(ggplot2)
+library(ggalt)
+
 
 renderInputs0 <- function() {
     fluidRow(

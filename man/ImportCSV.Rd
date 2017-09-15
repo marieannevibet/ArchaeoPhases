@@ -5,7 +5,7 @@
 \title{Importing a CSV file containing the output of the MCMC algorithm}
 \usage{
   ImportCSV(file, dec = '.', sep=',', comment.char='#', header = TRUE, 
-  iterationColumn = NULL, referenceYear = NULL, rowToWithdraw=NULL)
+  iterationColumn = NULL, referenceYear = NULL, rowToWithdraw=NULL, bin.width=NULL)
 }
 \arguments{
   \item{file}{the name of the CSV file containing the output of the MCMC algorithm}
@@ -15,7 +15,8 @@
   \item{header}{a logical value indicating whether the file contains the names of the variables as its first line. }
   \item{iterationColumn}{number of the column corresponding to the iteration values. Default = 1.}
   \item{referenceYear}{the year of reference for MCMC in date format other than BC/AD. Default value = NULL as ChronoModel and Oxacl export the MCMC samples in BC/AD format.}
-  \item{rowToWithdraw}{the number of the row to be withdrawn, or "last" for the last row of the data frame. Default = NULL.}\item{bin.width}{the bin width specified in a BCal project. Note that bin.width does not have to be set if the BCal default bin width of 1 is used.}
+  \item{rowToWithdraw}{the number of the row to be withdrawn, or "last" for the last row of the data frame. Default = NULL.}
+  \item{bin.width}{the bin width specified in a BCal project. Note that bin.width does not have to be set if the BCal default bin width of 1 is used.}
 }
 \value{
   Returns a dataframe containing a representation of the data in the file. MCMC should now be in date format BC/AD.   
