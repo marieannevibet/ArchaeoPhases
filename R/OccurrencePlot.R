@@ -107,25 +107,19 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
     Ordered.df[,2] <- 1950-Ordered.df[,2]
     Ordered.df[,3] <- 1950-Ordered.df[,3]
   }
-  
 
-  h <- ggplot(data = Ordered.df,
-              aes(y=factor(Ordered.df$y.labs, levels=unique(Ordered.df$y.labs), ordered=TRUE),
-                  x=Ordered.df[,2],
-                  xend=Ordered.df[,3])) +
-    geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide,
-                  dot_guide_size = dot.guide.size) +
-    labs(x = labelXaxis, y = labelYaxis, title = title,
-         subtitle = subtitle, caption = caption)
+  h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y=factor(Ordered.df$y.labs, levels=unique(Ordered.df$y.labs), ordered=TRUE), x=Ordered.df[,2], xend=Ordered.df[,3])) 
+  h <- h + ggalt::geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide, dot_guide_size = dot.guide.size) 
+  h <- h + ggplot2::labs(x = labelXaxis, y = labelYaxis, title = title,subtitle = subtitle, caption = caption)
+  
   if (!y.grid) {
-    h <- h + theme(panel.grid.major.y=element_blank())
+    h <- h + ggplot2::theme(panel.grid.major.y=ggplot2::element_blank())
   }
   if (!is.null(x.min) & !is.null(x.max)) {
-    h <- h + xlim(x.min, x.max)
+    h <- h + ggplot2::xlim(x.min, x.max)
   }
   if (!is.null(file)) {
-    ggsave(filename = file, plot = h, height = height,
-           width = width, units = units)
+    ggplot2::ggsave(filename = file, plot = h, height = height,width = width, units = units)
   }
   if(appliShiny == FALSE) {
     dev.new(height = height, width = width)

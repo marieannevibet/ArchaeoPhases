@@ -69,7 +69,7 @@ Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratif
 \examples{
   data(Events); 
   TempoPlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
-  TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = TRUE)
+  TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = FALSE)
 }
 \keyword{ tempo plot}
 \keyword{ credible interval }

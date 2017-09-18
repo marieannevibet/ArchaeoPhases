@@ -5,11 +5,11 @@ library(ArchaeoPhases)
 
 ## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
 data("KADatesChronoModel")
-TempoPlot(KADatesChronoModel, c(2:17), level = 0.95)
+TempoPlot(KADatesChronoModel, c(2:17), level = 0.95, print.data.result = FALSE)
 
 ## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
 data("KADatesChronoModel")
-TempoActivityPlot(KADatesChronoModel, c(2:17), level = 0.95)
+TempoActivityPlot(KADatesChronoModel, c(2:17), level = 0.95, print.data.result = FALSE)
 
 ## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
 data("KADatesChronoModel")

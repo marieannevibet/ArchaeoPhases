@@ -56,35 +56,3 @@ gelman.plot(mcmcList[,1,])
 ## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
 geweke.diag(mcmcList[,1,], frac1=0.1, frac2=0.5)
 
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KADatesChronoModel")
-TempoPlot(KADatesChronoModel, c(2:17), level = 0.95)
-
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KADatesChronoModel")
-TempoActivityPlot(KADatesChronoModel, c(2:17), level = 0.95)
-
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KADatesChronoModel")
-OccurrencePlot(KADatesChronoModel, c(2:17), level = 0.95)
-
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KAPhasesChronoModel")
-MultiPhaseTimeRange(KAPhasesChronoModel, c(8,6,4,2), level = 0.95)
-
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KAPhasesChronoModel")
-MultiPhasePlot(KAPhasesChronoModel, c(8,6,4,2), level = 0.95)
-
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KAPhasesChronoModel")
-MultiPhasesTransition(KAPhasesChronoModel, c(8,6,4,2), level = 0.95)
-
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KAPhasesChronoModel")
-MultiPhasesGap(KAPhasesChronoModel, c(8,6,4,2), level = 0.95)
-
-## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------
-data("KAPhasesChronoModel")
-MultiSuccessionPlot(KAPhasesChronoModel, c(8,6,4,2), level = 0.95)
-

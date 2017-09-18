@@ -109,28 +109,25 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
   colnames(plot.result) <- c("Var1", "Legend", "Count")
   plot.result$Year <- result$t
   if (colors) {
-    h <- ggplot(plot.result, aes(x = plot.result$Year, y = plot.result$Count,
-                                 colour = plot.result$Legend))
-    h <- h + guides(colour = guide_legend(title = legend.title))
+    h <- ggplot2::ggplot(plot.result, ggplot2::aes(x = plot.result$Year, y = plot.result$Count,colour = plot.result$Legend))
+    h <- h + ggplot2::guides(colour = ggplot2::guide_legend(title = legend.title))
   }
   else {
-    h <- ggplot(plot.result, aes(x = plot.result$Year, y = plot.result$Count,
-                                 linetype = plot.result$Legend))
-    h <- h + scale_linetype_manual(values = line.types,
-                                   guide = guide_legend(title = legend.title))
+    h <- ggplot2::ggplot(plot.result, ggplot2::aes(x = plot.result$Year, y = plot.result$Count,linetype = plot.result$Legend))
+    h <- h + ggplot2::scale_linetype_manual(values = line.types,guide = ggplot2::guide_legend(title = legend.title))
   }
-  h <- h + geom_line()
-  h <- h + scale_y_continuous(breaks = pretty(x = plot.result$Count))
-  h <- h + labs(x = x.label,
+  h <- h + ggplot2::geom_line()
+  h <- h + ggplot2::scale_y_continuous(breaks = pretty(x = plot.result$Count))
+  h <- h + ggplot2::labs(x = x.label,
                 y = y.label,
                 title = title,
                 subtitle = subtitle,
                 caption = caption)
   if (!is.null(x.min) & !is.null(x.max)) {
-    h <- h + xlim(x.min, x.max)
+    h <- h + ggplot2::xlim(x.min, x.max)
   }
   if (!is.null(file)) {
-    ggsave(filename = file, plot = h, height = height,
+    ggplot2::ggsave(filename = file, plot = h, height = height,
            width = width, units = units)
   }
   if(appliShiny == FALSE) {

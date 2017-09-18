@@ -107,20 +107,20 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
   result.mat <- cbind(t=x, y=y)
   plot.result <- as.data.frame(result.mat)
   
-  h <- ggplot(data = plot.result, aes(x = t, y = y))
-  h <- h + scale_linetype_manual(values = line.types)
-  h <- h + geom_line()
-  h <- h + scale_y_continuous(breaks = pretty(x = plot.result$y))
-  h <- h + labs(x = x.label,
+  h <- ggplot2::ggplot(data = plot.result, ggplot2::aes(x = t, y = y))
+  h <- h + ggplot2::scale_linetype_manual(values = line.types)
+  h <- h + ggplot2::geom_line()
+  h <- h + ggplot2::scale_y_continuous(breaks = pretty(x = plot.result$y))
+  h <- h + ggplot2::labs(x = x.label,
                 y = y.label,
                 title = title,
                 subtitle = subtitle,
                 caption = caption)
   if (!is.null(x.min) & !is.null(x.max)) {
-    h <- h + xlim(x.min, x.max)
+    h <- h + ggplot2::xlim(x.min, x.max)
   }
   if (!is.null(file)) {
-    ggsave(filename = file, plot = h, height = height,
+    ggplot2::ggsave(filename = file, plot = h, height = height,
            width = width, units = units)
   }
   if(appliShiny == FALSE) {

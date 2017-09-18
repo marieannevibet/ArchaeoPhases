@@ -1,12 +1,9 @@
-library(shiny)
-library(shinythemes)
+#library(shiny)
+#library(shinythemes)
 library(ArchaeoPhases)
-library(DT)
-#library(dplyr)
-library(hdrcde)
-library(coda)
-library(ggplot2)
-library(ggalt)
+#library(hdrcde)
+#library(coda)
+#library(DT)
 
 
 renderInputs0 <- function() {
@@ -174,8 +171,8 @@ renderInputs22 <- function() {
       br(),
       h5(helpText("Occurrence plot options")),
       textInput(inputId='titleOccurrenceplot', label="Occurrence plot title", "Occurrence plot" ),
-      textInput(inputId='xlabelO', label="x-label", "Calendar year" ),
-      textInput(inputId='ylabelO', label="y-label", "Cumulative events" ),
+      #textInput(inputId='xlabelO', label="x-label", "Calendar year" ),
+      #textInput(inputId='ylabelO', label="y-label", "Cumulative events" ),
       downloadButton('downloadOccurrencePlot', 'Download Occurrence plot')
     )
     

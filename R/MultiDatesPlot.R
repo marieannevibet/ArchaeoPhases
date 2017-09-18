@@ -47,8 +47,6 @@ MultiDatesPlot <- function (data, position, level = 0.95, intervals = "CI", orde
                             dot.guide.size = 0.25, y.grid = FALSE,
                             file = NULL, appliShiny=FALSE, print.data.result = TRUE)
 {
-  library(ggplot2)
-  library(ggalt)
   if (x.scale == "elapsed") {
     if (is.null(elapsed.origin.position)) {
       stop("Elapsed origin not specified")
@@ -91,22 +89,22 @@ MultiDatesPlot <- function (data, position, level = 0.95, intervals = "CI", orde
   }
   
   if(order == "increasing"){
-    h <- ggplot(data = Ordered.df, aes(y = reorder(Ordered.df$y.labs, Ordered.df[,2]), x=Ordered.df[,2], xend=Ordered.df[,3]))
+    h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y = reorder(Ordered.df$y.labs, Ordered.df[,2]), x=Ordered.df[,2], xend=Ordered.df[,3]))
   } else if (order == "default") {
-    h <- ggplot(data = Ordered.df, aes(y = Ordered.df$y.labs, x=Ordered.df[,2], xend=Ordered.df[,3]))
+    h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y = Ordered.df$y.labs, x=Ordered.df[,2], xend=Ordered.df[,3]))
   }
   
-  h <- h + labs(x = labelXaxis, y = labelYaxis, title = title,subtitle = subtitle, caption = caption)
-  h <- h + geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide,dot_guide_size = dot.guide.size)
+  h <- h + ggplot2::labs(x = labelXaxis, y = labelYaxis, title = title,subtitle = subtitle, caption = caption)
+  h <- h + ggalt::geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide,dot_guide_size = dot.guide.size)
   
   if (!y.grid) {
-    h <- h + theme(panel.grid.major.y=element_blank())
+    h <- h + ggplot2::theme(panel.grid.major.y=ggplot2::element_blank())
   }
   if (!is.null(x.min) & !is.null(x.max)) {
-    h <- h + xlim(x.min, x.max)
+    h <- h + ggplot2::xlim(x.min, x.max)
   }
   if (!is.null(file)) {
-    ggsave(filename = file, plot = h, height = height,
+    ggplot2::ggsave(filename = file, plot = h, height = height,
            width = width, units = units)
   }
   if(appliShiny == FALSE) {
