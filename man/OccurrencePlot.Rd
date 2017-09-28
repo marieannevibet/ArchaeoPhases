@@ -13,10 +13,10 @@ OccurrencePlot(data, position, plot.result = NULL, level = 0.95,
                            height = 7, width = 7, units = "in",
                            x.min = NULL, x.max = NULL, x.scale = "calendar",
                            elapsed.origin.position = NULL,
-                           dumbbell.size = 3, dot.guide = FALSE,
+                           dumbbell.size = 1, dot.guide = FALSE,
                            dot.guide.size = 0.25, y.grid = FALSE,
                            file = NULL, 
-                           appliShiny=FALSE, print.data.result = TRUE)
+                           newWindow=TRUE, print.data.result = FALSE)
 }
 \arguments{
   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
@@ -43,7 +43,7 @@ OccurrencePlot(data, position, plot.result = NULL, level = 0.95,
   \item{dot.guide.size}{size of the dot guides}
   \item{y.grid}{switch for horizontal grids}
   \item{file}{the name of the file to be saved. If NULL then no graph is saved.}
-  \item{appliShiny}{whether the plot is drawn with the shiny app or not}
+  \item{newWindow}{whether the plot is drawn within a new window or not}
   \item{print.data.result}{If TRUE, the list containing the data to plot will be given}
 }
 \value{

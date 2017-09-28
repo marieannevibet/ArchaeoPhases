@@ -1,9 +1,9 @@
-#library(shiny)
-#library(shinythemes)
+library(shiny)
+library(shinythemes)
 library(ArchaeoPhases)
-#library(hdrcde)
-#library(coda)
-#library(DT)
+library(hdrcde)
+library(coda)
+library(DT)
 
 
 renderInputs0 <- function() {

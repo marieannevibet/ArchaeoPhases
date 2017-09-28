@@ -27,24 +27,17 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
   # importing the CSV file
   data = read.csv(file, dec = dec, sep=sep, comment.char = comment.char,
                   header = header)
-  
+ 
   # Withdrawing the iterations column
-  if (is.null(iterationColumn)){
-    return(data)
-  }
-  else {
+  if (!is.null(iterationColumn)){
     data = data[,-iterationColumn]
   }
   
   # Withdrawing a row
-  if (is.null(rowToWithdraw)){
-    return(data)
-  }
-  else {
+  if (!is.null(rowToWithdraw)){
     if (is.numeric(rowToWithdraw)) {
       data = data[-rowToWithdraw, ]
-    }
-    else {
+    }else{
       if (rowToWithdraw == "last") {
         data = data[-nrow(data), ]
       }
@@ -61,24 +54,30 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
       if (is.numeric(data[, i]) == TRUE) {
         data[, i] = sapply(data[, i], unbin, bin.width)
       }
-    }
-    
-    # Conversion of the MCMC samples in date format cal BP or other to BC/AD
-    if (is.null(referenceYear)){
-      return(data)
-    }
-    else {
-      data2 = data
-      L = length(data)
-      conv <- function(value, T0){
-        T0 - value
-      }
-      for (i in 1:L){
-        if( is.numeric(data[,i]) == TRUE){
-          data2[,i] = sapply(data[,i], conv, referenceYear)
-        }
-      }
-      return(data2)
+      
     }
   }
+    
+  # Conversion of the MCMC samples in date format cal BP or other to BC/AD
+  if (!is.null(referenceYear)){
+    data2 = data
+    L = length(data)
+    conv <- function(value, T0){
+      T0 - value
+    }
+    for (i in 1:L){
+      if( is.numeric(data[,i]) == TRUE){
+        data2[,i] = sapply(data[,i], conv, referenceYear)
+      }
+    }
+    
+    data = data2
+  }
+  
+  return(data)
+
+    
+  
+
+
 }

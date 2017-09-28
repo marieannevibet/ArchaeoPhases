@@ -28,7 +28,7 @@
 #' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
 #' @param x.scale one of "calendar", "bp", or "elapsed"
 #' @param elapsed.origin.position if x.scale is "elapsed", the position of the column corresponding to the occurrence from which elapsed time is calculated
-#' @param appliShiny whether the plot is drawn with the shiny app or not
+#' @param newWindow whether the plot is drawn within a new window or not
 #' @param print.data.result If TRUE, the list containing the data to plot will be given
 #' @return a list containing the data to plot
 #' @export
@@ -47,7 +47,7 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
                        width = 7, height = 7, units = "in",
                        x.min = NULL, x.max = NULL, colors = TRUE,
                        file = NULL, x.scale = "calendar",
-                       elapsed.origin.position = NULL, appliShiny=FALSE, print.data.result = TRUE)
+                       elapsed.origin.position = NULL, newWindow=TRUE, print.data.result = FALSE)
 {
   if (is.null(plot.result))
   {
@@ -130,7 +130,7 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
     ggplot2::ggsave(filename = file, plot = h, height = height,
            width = width, units = units)
   }
-  if(appliShiny == FALSE) {
+  if(newWindow == TRUE) {
     dev.new(height = height, width = width)
   }
   print(h)

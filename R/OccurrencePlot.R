@@ -28,7 +28,7 @@
 #' @param dot.guide.size size of the dot guide
 #' @param y.grid switch for horizontal grid lines
 #' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
-#' @param appliShiny whether the plot is drawn with the shiny app or not
+#' @param newWindow whether the plot is drawn within a new window or not
 #' @param print.data.result If TRUE, the list containing the data to plot will be given
 #' @return a plot
 #' @export
@@ -43,9 +43,9 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
                            height = 7, width = 7, units = "in",
                            x.min = NULL, x.max = NULL, x.scale = "calendar",
                            elapsed.origin.position = NULL,
-                           dumbbell.size = 3, dot.guide = FALSE,
+                           dumbbell.size = 1, dot.guide = FALSE,
                            dot.guide.size = 0.25, y.grid = FALSE,
-                           file = NULL, appliShiny=FALSE, print.data.result = TRUE)
+                           file = NULL, newWindow=TRUE, print.data.result = FALSE)
 {
 
   sort.rows <- function(x) {
@@ -121,7 +121,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
   if (!is.null(file)) {
     ggplot2::ggsave(filename = file, plot = h, height = height,width = width, units = units)
   }
-  if(appliShiny == FALSE) {
+  if(newWindow == TRUE) {
     dev.new(height = height, width = width)
   }
   print(h)

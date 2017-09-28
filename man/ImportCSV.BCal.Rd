@@ -28,7 +28,7 @@
   write.csv(Fishpond, "fishpond_MCMC.csv", row.names=FALSE)
   Fishpond = ImportCSV.BCal("fishpond_MCMC.csv", bin.width=1)
   # equivalent to 
-  Fishpond2 = ImportCSV("fishpond_MCMC.csv", dec = '.', sep=',',referenceYear = 1950, 
-  rowToWithdraw = "last", bin.width=1)
+  #Fishpond2 = ImportCSV("fishpond_MCMC.csv", dec = '.', sep=',',referenceYear = 1950, 
+  #rowToWithdraw = "last", bin.width=1)
 }
 \keyword{CSV file}

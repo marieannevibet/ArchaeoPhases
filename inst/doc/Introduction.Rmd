@@ -16,12 +16,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-1. Introduction to ArchaeoPhases
+
+1. ArchaeoPhases : Introduction
 ===============
 
 ```{r, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(comment = "")
-options(width = 120, max.print = 100)
+options(width = 120, max.print = 5)
 library(ArchaeoPhases)
 ```
 

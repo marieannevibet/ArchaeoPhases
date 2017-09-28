@@ -1,6 +1,6 @@
 ## ---- echo = FALSE, message = FALSE-----------------------------------------------------------------------------------
 knitr::opts_chunk$set(comment = "")
-options(width = 120, max.print = 100)
+options(width = 120, max.print = 5)
 library(ArchaeoPhases)
 
 ## ----fig.align='center',fig.width=6,fig.height=5----------------------------------------------------------------------

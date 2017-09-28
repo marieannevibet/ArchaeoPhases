@@ -16,12 +16,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-3. Analysis of groups of dates
+3. ArchaeoPhases : Analysis of groups of dates
 ===============
 
 ```{r, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(comment = "")
-options(width = 120, max.print = 100)
+options(width = 120, max.print = 5)
 library(ArchaeoPhases)
 ```
 

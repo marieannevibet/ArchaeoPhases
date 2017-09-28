@@ -412,7 +412,7 @@ shinyServer(function(input, output, clientData, session) {
       if(is.null( input$multiChainsCI )) { return()}
       position = seq(1, length(input$multiChainsCI))
       #if(input$exportFile22IT == "TRUE") { outFile = "IntervalsPlot"} else{ outFile = NULL}
-      MultiDatesPlot(selectData(), position, intervals =input$intervals, order = input$order, level = input$level, title = input$titleIntervalsplot, appliShiny=TRUE, print.data.result = FALSE)
+      MultiDatesPlot(selectData(), position, intervals =input$intervals, order = input$order, level = input$level, title = input$titleIntervalsplot, newWindow=FALSE, print.data.result = FALSE)
     })#, height = 600, width = 800)
     
     output$downloadIntervalPlot <- downloadHandler(
@@ -438,7 +438,7 @@ shinyServer(function(input, output, clientData, session) {
         if(is.null( input$multiChainsCI )) { return()}
         position = seq(1, length(input$multiChainsCI))
         #if(input$exportFile22 == "TRUE") { outFile = "TempoPlot.png"} else{ outFile = NULL}
-        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors, appliShiny=TRUE, print.data.result = FALSE)
+        TempoPlot(selectData(), position, level = input$level, title = input$titleTempoplot, Gauss=input$GaussCI, count=input$count, x.label=input$xlabel, y.label=input$ylabel, colors = input$colors, newWindow=FALSE, print.data.result = FALSE)
     })#, height = 600, width = 800)
     
     output$TempoPlotUI <- renderUI({
@@ -460,7 +460,7 @@ shinyServer(function(input, output, clientData, session) {
     output$TempoActivityPlot <- renderPlot({
       if(is.null( input$multiChainsCI )) { return()}
       position = seq(1, length(input$multiChainsCI))
-      TempoActivityPlot(selectData(), position, level = input$level, count=input$count, appliShiny=TRUE, print.data.result = FALSE)
+      TempoActivityPlot(selectData(), position, level = input$level, count=input$count, newWindow=FALSE, print.data.result = FALSE)
     })#, height = 600, width = 800)
 
     output$TempoActivityPlotUI <- renderUI({
@@ -482,7 +482,7 @@ shinyServer(function(input, output, clientData, session) {
     output$OccurrencePlot <- renderPlot({
       if(is.null( input$multiChainsCI )) { return()}
       position = seq(1, length(input$multiChainsCI))
-      OccurrencePlot(selectData(), position, level = input$level, count=input$count, appliShiny=TRUE, print.data.result = FALSE)
+      OccurrencePlot(selectData(), position, level = input$level, count=input$count, newWindow=FALSE, print.data.result = FALSE)
     })
     
     output$OccurrencePlotUI <- renderUI({

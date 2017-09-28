@@ -18,7 +18,7 @@ TempoPlot(data, position, plot.result = NULL, level = 0.95,
                        x.min = NULL, x.max = NULL, colors = TRUE,
                        file = NULL, x.scale = "calendar",
                        elapsed.origin.position = NULL, 
-                       appliShiny=FALSE, print.data.result = TRUE)
+                       newWindow=TRUE, print.data.result = FALSE)
 }
 \arguments{
   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
@@ -44,7 +44,7 @@ TempoPlot(data, position, plot.result = NULL, level = 0.95,
   \item{file}{the name of the graph (+ extension) that will be saved if chosen. Null by default.}
   \item{x.scale}{one of "calendar", "bp", or "elapsed"}
   \item{elapsed.origin.position}{if x.scale is "elapsed", the position of the column corresponding to the occurrence from which elapsed time is calculated}
-  \item{appliShiny}{whether the plot is drawn with the shiny app or not}
+  \item{newWindow}{whether the plot is drawn within a new window or not}
   \item{print.data.result}{If TRUE, the list containing the data to plot will be given. Default = TRUE.}
 }
 \value{
@@ -68,7 +68,7 @@ Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratif
 }
 \examples{
   data(Events); 
-  TempoPlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
+  TempoPlot(Events[1:1000,], c(2:5), print.data.result = FALSE)
   TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = FALSE)
 }
 \keyword{ tempo plot}
